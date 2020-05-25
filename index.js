@@ -31,10 +31,7 @@ client.on('ready', () => {
     .then(() => console.log("Connected to database..."))
     .catch((err) => console.error(err));
   console.log('Ready...');
-  const guild_count = Array.from(client.guilds.cache.keys()).length;
-  client.user.setActivity(`${guild_count} server${guild_count > 1 ? 's' : ''}. | ${ConstantsManager.default_prefix}help`, { type: 'WATCHING' })
-    .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
-    .catch(console.error);
+  GuildManager.updateGuildCountMessage(client);
 });
 
 client.on('guildCreate', () => {
