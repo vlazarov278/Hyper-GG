@@ -1,5 +1,22 @@
 const Discord = require("discord.js");
 
+const extractChannelFromMessage = async (message, args) => {
+    return new Promise((resolve, reject) => {
+        if(!message.mentions.channels) {
+            var noMentionedChannelException = new Error("No channels were mentioned in the message.");
+            noMentionedChannelException.name = "NoMentionedChannelException";
+            return reject(noMentionedChannelException);
+        }
+        const channel = message.mentions.channels.first();
+        if(channel.guild.id != message.guild.id) {
+            var outsideGuildChannel = new Error("Channel is not in this guild");
+            outsideGuildChannel.name = "OutsideGuildChannel";
+            return reject(outsideGuildChannel);
+        }
+        return resolve(channel);
+    });
+};
+
 /**
  * 
  * @param {Discord.Message} message 
@@ -45,5 +62,6 @@ const extractUserFromMessage = async (message, args) => {
 }
 
 module.exports = {
-    extractUserFromMessage
+    extractUserFromMessage,
+    extractChannelFromMessage
 }
