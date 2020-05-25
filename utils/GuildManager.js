@@ -6,7 +6,7 @@ const updateGuildCountMessage = async (client) => {
     return new Promise((resolve, reject) => {
         const guild_count = Array.from(client.guilds.cache.keys()).length;
 
-        client.user.setActivity(`${guild_count} server${guild_count > 1 ? 's' : ''}. | ${ConstantsManager.default_prefix}help`, { type: 'WATCHING' })
+        client.user.setActivity(`${guild_count} server${guild_count > 1 ? 's' : ''}. | ${default_prefix}help`, { type: 'WATCHING' })
             .then(presence => {
                 console.log(`Activity set to ${presence.activities[0].name}`);
                 resolve();

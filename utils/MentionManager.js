@@ -5,7 +5,6 @@ const Discord = require("discord.js");
  * @param {Discord.Message} message 
  * @param {Array} args 
  */
-
 const extractUserFromMessage = async (message, args) => {
     return new Promise(async (resolve, reject) => {
         try {
