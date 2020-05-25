@@ -100,9 +100,11 @@ client.on('message', async (message) => {
       .then(res => {
         var isAllowed = false;
         if (res.includes(command.name)) isAllowed = true;
-        command.aliases.forEach(alias => {
-          if (res.includes(alias)) isAllowed = true;
-        })
+        if (command.aliases) {
+          command.aliases.forEach(alias => {
+            if (res.includes(alias)) isAllowed = true;
+          })
+        }
         if (isAllowed || message.member.hasPermission("ADMINISTRATOR")) return command.execute(message, args);
         message.delete();
         return message.author.send(`You do not have permission in this server to execute the command \`${command.name}\`. If you are managing the server, make sure to assign permissions correctly as by default all commands are disabled for non-admin members.`);

@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const UserManager = require('../utils/UserManager');
 const ArrayManager = require('../utils/ArrayManager');
 const EmojisManager = require('../utils/EmojisManager');
 const ConstantsManager = require('../utils/ConstantsManager');
@@ -21,6 +22,7 @@ const execute = async (message, args) => {
                 .setTitle("CREDITS DROP")
                 .setDescription(description)
                 .setThumbnail("https://thumbs.gfycat.com/UniqueSizzlingFinwhale-small.gif")
+                .setFooter("Drops can come at any time, be on the lookout.", message.client.user.displayAvatarURL())
                 .setTimestamp();
 
             const msg = await channel.send({embed});
@@ -35,11 +37,14 @@ const execute = async (message, args) => {
                         });
                     });
                     const arrayUsers = Array.from(users);
-                    description = `~~React to this embed in the next ${seconds} seconds for a prize of ${prize} credits~~\n${arrayUsers.length == 0 ? "**No one reacted fast enough.**" : `**Winners: ${arrayUsers.join(', ')}**`}`;
+                    description = `~~Put a reaction on this message in the next ${seconds} seconds for a prize of ${prize} credits~~\n${arrayUsers.length == 0 ? "**No one reacted fast enough.**" : `**Winners: ${arrayUsers.join(', ')}**`}`;
                     embed.setDescription(description);
                     embed.setTitle("CREDITS DROP - FINISHED")
                     if(arrayUsers.length == 0) embed.setThumbnail("https://www.techjunkie.com/wp-content/uploads/2018/03/Cute-Variants-of-Sad-Gif-3.gif");
                     else embed.setThumbnail("https://media2.giphy.com/media/ehz3LfVj7NvpY8jYUY/giphy.gif");
+                    users.forEach(user => {
+                        UserManager.addBalance(user.id, message.guild.id, prize);
+                    });
                     msg.edit({embed});
                 })
                 .catch(err => {

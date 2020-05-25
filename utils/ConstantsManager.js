@@ -9,5 +9,6 @@ module.exports = {
         'Meme',
         'Hair',
         'Glasses'
-    ]
+    ],
+    owner_id: "317023519550472192"
 }
