@@ -112,6 +112,7 @@ client.on('message', async (message) => {
       });
   } catch (error) {
     console.error(error);
+    // In case an error occurs in the perms command, this makes sure that the bot doesn't restrict the users from accessing it again
     delete message.client.perms_setup[message.guild.id];
     message.reply('there was an error trying to execute that command! Sorry for the inconvenience.');
   }
