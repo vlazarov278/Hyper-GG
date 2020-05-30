@@ -7,7 +7,6 @@ const path = require('path');
 
 const GuildManager = require('./utils/GuildManager');
 const GuildRoleManager = require('./utils/GuildRoleManager');
-const ConstantsManager = require('./utils/ConstantsManager');
 
 const db = require("./config/database");
 db.sync();
