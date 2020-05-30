@@ -21,7 +21,7 @@ const execute = async (message, args) => {
     for (var index = 0; index < 3; index++) {
         // Here will be generated 6 emojis, 3 for the line #1 and 3 for line #3
         const generatedEmojis = [];
-        const emojis = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍒", "🍑", "🍍", "🍅", "🌽", "🍞", "🧀", "🍔", "🌭", "🍕", "☕", "🍷", "🍸", "🍫", "🍿", "🍭", "🍩", "🥝", "🍣", "🍨", "🥓", "🍠"];
+        const emojis = EmojisManager.getSlotsEmotes();
         for (let i = 0; i < 6; i++) {
             generatedEmojis.push(ArrayManager.getRandomElement(emojis));
         }
