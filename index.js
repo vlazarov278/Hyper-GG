@@ -28,7 +28,12 @@ for (const file of commandFiles) {
 client.on('ready', () => {
   db.authenticate()
     .then(() => console.log("Connected to database..."))
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      // Connection to database is crucial so in case of an error, bot gets shut down
+      client.destroy();
+      console.log(err);
+      console.log("Client is destroyed.");
+    });
   console.log('Ready...');
   GuildManager.updateGuildCountMessage(client);
 });
